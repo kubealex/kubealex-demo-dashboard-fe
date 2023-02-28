@@ -5,6 +5,7 @@ import {Button, PanelMain, PanelMainBody, Panel, TextInput} from '@patternfly/re
 function App() {
 
   const inputRef = useRef(null)
+  const [labelText, setLabelText] = useState('')
 
   function renderPanel() {
     //alert('Button was pressed?');
@@ -21,15 +22,13 @@ function App() {
   };
 
   const TextInputBasic = () => {
-    const [value, setValue] = React.useState('');
+    const [textValue, setValue] = React.useState('');
     return(
     <div style={{width:300+'px'}} >
-    <TextInput ref={inputRef} value={value} type="text" onChange={value => setValue(value)} aria-label="text input example" />
+    <TextInput ref={inputRef} value={textValue} type="text" onChange={textValue => setValue(textValue)} aria-label="Text sample" />
     </div>
     )
   };
-
-  const [labelText, setLabelText] = useState('')
 
   return (
     <div id='test' className="App .pf-m-overpass-font">
