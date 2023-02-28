@@ -31,11 +31,11 @@ function App() {
   };
 
   return (
-    <div id='test' className="App .pf-m-overpass-font">
+    <div className="App .pf-m-overpass-font">
       <header className="App-header">
         <Button variant="primary" onClick={renderPanel}> Render panel </Button>
         <BasicPanel value={labelText}/>
-        {<TextInputBasic />}
+        <TextInputBasic />
       </header>
     </div>
   );
