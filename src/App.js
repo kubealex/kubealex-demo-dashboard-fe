@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 //import './App.css';
-import {Button, PanelMain, PanelMainBody, Panel, TextInput, Spinner} from '@patternfly/react-core';
+import {Button, PanelMain, PanelMainBody, Panel, TextInput} from '@patternfly/react-core';
 
 function App() {
 
@@ -8,18 +8,14 @@ function App() {
 
   function renderPanel() {
     //alert('Button was pressed?');
-    setLabel(inputRef.current.value)
+    setLabelText(inputRef.current.value)
   }
 
-  function setLabel(message) {
-  setLabelText(message)
-}
-
-  const BasicPanel = () => {
+  const BasicPanel = (props) => {
     return(
     <Panel>
       <PanelMain>
-        <PanelMainBody>{labelText}</PanelMainBody>
+        <PanelMainBody>{props.value}</PanelMainBody>
       </PanelMain>
     </Panel>)
   };
@@ -39,7 +35,7 @@ function App() {
     <div id='test' className="App .pf-m-overpass-font">
       <header className="App-header">
         <Button variant="primary" onClick={renderPanel}> Render panel </Button>
-        {<BasicPanel />}
+        <BasicPanel value={labelText}/>
         {<TextInputBasic />}
       </header>
     </div>
