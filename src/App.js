@@ -5,7 +5,7 @@ import {Spinner} from '@patternfly/react-core';
 
 function App() {
 
-  function callApi() {
+  function renderPanel() {
     alert('Button was pressed?');
     setLabelText('Hey!')
   }
@@ -24,7 +24,7 @@ function App() {
   return (
     <div id='test' className="App .pf-m-overpass-font">
       <header className="App-header">
-        <Button variant="primary" onClick={callApi}> This is a test </Button>
+        <Button variant="primary" onClick={renderPanel}> Render panel </Button>
         {<BasicPanel />}
       </header>
     </div>
