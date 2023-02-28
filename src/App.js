@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 //import './App.css';
-import {Button, PanelMain, PanelMainBody, Panel} from '@patternfly/react-core';
-import {Spinner} from '@patternfly/react-core';
+import {Button, PanelMain, PanelMainBody, Panel, TextInput, Spinner} from '@patternfly/react-core';
 
 function App() {
 
   function renderPanel() {
-    alert('Button was pressed?');
-    setLabelText('Hey!')
+    //alert('Button was pressed?');
+    setLabel("Hey there")
   }
+
+  function setLabel(message) {
+  setLabelText(message)
+}
 
   const BasicPanel = () => {
     return(
@@ -19,6 +22,11 @@ function App() {
     </Panel>)
   };
 
+  const TextInputBasic = () => {
+    const [value, setValue] = React.useState('');
+    return <TextInput value={value} type="text" onChange={value => setValue(value)} aria-label="text input example" />;
+  };
+
   const [labelText, setLabelText] = useState('')
 
   return (
@@ -26,6 +34,7 @@ function App() {
       <header className="App-header">
         <Button variant="primary" onClick={renderPanel}> Render panel </Button>
         {<BasicPanel />}
+        {<TextInputBasic />}
       </header>
     </div>
   );
