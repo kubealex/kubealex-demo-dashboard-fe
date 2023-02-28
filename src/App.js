@@ -1,22 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+//import './App.css';
+import {Button, PanelMain, PanelMainBody, Panel} from '@patternfly/react-core';
+import {Spinner} from '@patternfly/react-core';
 
 function App() {
+
+  function callApi() {
+    alert('Button was pressed?');
+    setLabelText('Hey!')
+  }
+
+  const BasicPanel = () => {
+    return(
+    <Panel>
+      <PanelMain>
+        <PanelMainBody>{labelText}</PanelMainBody>
+      </PanelMain>
+    </Panel>)
+  };
+
+  const [labelText, setLabelText] = useState('')
+
   return (
-    <div className="App">
+    <div id='test' className="App .pf-m-overpass-font">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Button variant="primary" onClick={callApi}> This is a test </Button>
+        {<BasicPanel />}
       </header>
     </div>
   );
