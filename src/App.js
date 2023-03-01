@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-//import './App.css';
+import './App.css';
 import {Button, PanelMain, PanelMainBody, Panel, TextInput} from '@patternfly/react-core';
 
 function App() {
@@ -31,11 +31,11 @@ function App() {
   };
 
   return (
-    <div className="App .pf-m-overpass-font">
+    <div className="App center">
       <header className="App-header">
+        <TextInputBasic />
         <Button variant="primary" onClick={renderPanel}> Render panel </Button>
         <BasicPanel value={labelText}/>
-        <TextInputBasic />
       </header>
     </div>
   );
