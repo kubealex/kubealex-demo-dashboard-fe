@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./IndexPage.css";
+import "../../assets/IndexPage.css";
 import {
   Button,
   PanelMain,
@@ -33,7 +33,7 @@ export default function IndexPage() {
   const TextInputBasic = () => {
     const [textValue, setValue] = React.useState("");
     return (
-      <div style={{ width: 300 + "px" }}>
+      <div className="textInputDiv">
         <TextInput
           ref={inputRef}
           value={textValue}

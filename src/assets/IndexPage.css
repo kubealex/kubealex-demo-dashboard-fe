@@ -4,3 +4,7 @@
   align-items: center;
   height: 100vh;
 }
+
+.textInputDiv{
+    width: 300px;
+}
