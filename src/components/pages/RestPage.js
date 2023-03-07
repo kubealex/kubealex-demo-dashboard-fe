@@ -44,7 +44,7 @@ export default function IndexPage() {
       <header className="App-header">
         <DividerUsingDiv />
         <Button variant="primary" onClick={fetchData}>
-          Render panel
+          {isLoading ? "Loading..." : "Render panel"}
         </Button>
         <DividerUsingDiv />
         {posts.map((post) => {
