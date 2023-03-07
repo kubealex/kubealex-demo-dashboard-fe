@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import "../../assets/IndexPage.css";
+import React, { useState } from "react";
+import "../../assets/RestPage.css";
 import {
   Button,
   PanelMain,
