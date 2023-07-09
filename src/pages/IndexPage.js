@@ -2,8 +2,6 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import {
   Page,
-  PageSection,
-  PageSectionVariants,
   PageSidebar,
   Nav,
   NavList,
@@ -16,10 +14,15 @@ import {
   MastheadContent,
   Brand,
 } from '@patternfly/react-core';
-import { HomeIcon, CubesIcon, BarsIcon } from '@patternfly/react-icons';
+import { HomeIcon, CubesIcon, BarsIcon, CogIcon } from '@patternfly/react-icons';
 import pfLogo from '../assets/patternfly_logo.svg'
 
-const IndexPage = ({ children }) => {
+const IndexPage = () => {
+
+  const [activeItem, setActiveItem] = React.useState(0);
+  const onSelect = result => {
+    setActiveItem(result.itemId);
+  };
 
   const pageLogo = (
     <Brand src="xxx" alt="PatternFly Logo">
@@ -46,16 +49,21 @@ const IndexPage = ({ children }) => {
   );
 
   const indexPageNav = (
-    <Nav aria-label="Nav">
+    <Nav onSelect={onSelect} aria-label="Nav">
     <NavList>
-      <NavItem>
-        <Link to="/">
-          <HomeIcon /> Home
+      <NavItem itemId={0} isActive={activeItem === 0}>
+        <Link to="/home">
+          Home
         </Link>
       </NavItem>
-      <NavItem>
+      <NavItem itemId={1} isActive={activeItem === 1}>
         <Link to="/rest">
-          <CubesIcon /> REST Page
+          REST Page
+        </Link>
+        </NavItem>
+        <NavItem itemId={2} isActive={activeItem === 2}>
+        <Link to="/eda">
+          EDA Page
         </Link>
       </NavItem>
     </NavList>
@@ -68,9 +76,7 @@ const IndexPage = ({ children }) => {
 
   return (
     <Page header={indexPageHeader} sidebar={indexPageSidebar} isManagedSidebar>
-      <PageSection variant={PageSectionVariants.light}>
-        {children}
-      </PageSection>
+        <Outlet/>
     </Page>
   );
 };
