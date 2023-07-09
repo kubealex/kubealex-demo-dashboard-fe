@@ -1,10 +1,9 @@
-import React from "react";
-import IndexPage from "./components/pages/IndexPage";
-import RestPage from "./components/pages/RestPage";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import IndexPage from './pages/IndexPage';
+import RestPage from './pages/RestPage';
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-export default function App() {
+const App = () => {
   return (
     <Router>
       <Routes>
@@ -13,4 +12,6 @@ export default function App() {
       </Routes>
     </Router>
   );
-}
+};
+
+export default App;
