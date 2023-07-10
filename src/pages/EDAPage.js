@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { PageSection, Title, Spinner } from '@patternfly/react-core';
+import React from 'react';
+import { PageSection } from '@patternfly/react-core';
 
 const EDAPage = () => {
 

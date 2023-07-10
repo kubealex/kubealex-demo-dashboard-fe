@@ -14,7 +14,7 @@ import {
   MastheadContent,
   Brand,
 } from '@patternfly/react-core';
-import { HomeIcon, CubesIcon, BarsIcon, CogIcon } from '@patternfly/react-icons';
+import { BarsIcon } from '@patternfly/react-icons';
 import pfLogo from '../assets/patternfly_logo.svg'
 
 const IndexPage = () => {
@@ -23,12 +23,6 @@ const IndexPage = () => {
   const onSelect = result => {
     setActiveItem(result.itemId);
   };
-
-  const pageLogo = (
-    <Brand src="xxx" alt="PatternFly Logo">
-      <source srcSet="xxxx" />
-    </Brand>
-  )
 
   const indexPageHeader = (
     <Masthead>
