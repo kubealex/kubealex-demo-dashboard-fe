@@ -12,9 +12,12 @@ import {
   MastheadMain,
   MastheadBrand,
   MastheadContent,
+  PageSection,
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
-import pfLogo from '../assets/patternfly_logo.svg'
+
+import { ReactComponent as Logo } from '../assets/logo.svg'
+import { ReactComponent as Scientist } from '../assets/scientist.svg'
 
 const IndexPage = () => {
 
@@ -32,11 +35,11 @@ const IndexPage = () => {
       </MastheadToggle>
       <MastheadMain>
         <MastheadBrand>
-          <img src={pfLogo} alt="Patterfly Logo" />
+          <Scientist width='50px' height='50px'/>
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>
-      <span>Content</span>
+      <span>kubealex Demo Dashboard</span>
     </MastheadContent>
     </Masthead>
   );
@@ -70,7 +73,10 @@ const IndexPage = () => {
   return (
     <Page header={indexPageHeader} sidebar={indexPageSidebar} isManagedSidebar>
         <Outlet/>
+        <PageSection><a href="https://commons.wikimedia.org/wiki/File:Mad_scientist_transparent_background.svg">J.J. at the English-language Wikipedia</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, via Wikimedia Commons</PageSection>
+
     </Page>
+
   );
 };
 
