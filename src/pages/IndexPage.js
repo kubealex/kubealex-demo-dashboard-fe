@@ -12,11 +12,9 @@ import {
   MastheadMain,
   MastheadBrand,
   MastheadContent,
-  PageSection,
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
 
-import { ReactComponent as Logo } from '../assets/logo.svg'
 import { ReactComponent as Scientist } from '../assets/scientist.svg'
 
 const IndexPage = () => {
