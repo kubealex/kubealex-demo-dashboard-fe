@@ -12,7 +12,6 @@ import {
   MastheadMain,
   MastheadBrand,
   MastheadContent,
-  Brand,
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
 import pfLogo from '../assets/patternfly_logo.svg'

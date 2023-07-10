@@ -1,11 +1,11 @@
 import React from 'react';
-import { PageSection } from '@patternfly/react-core';
+import { PageSection, Title } from '@patternfly/react-core';
 
 const HomePage = () => {
 
   return (
     <PageSection>
-        Use cases Dashboard
+      <Title headingLevel="h1">Welcome to this simple dashboard for testing</Title>
     </PageSection>
   );
 };
