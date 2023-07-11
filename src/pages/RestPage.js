@@ -1,34 +1,40 @@
-import React, { useState } from 'react';
-import { PageSection, Title, Spinner, TextArea, TextInput, Button, Panel, Divider } from '@patternfly/react-core';
+import React, { useState } from "react";
+import {
+  PageSection,
+  Title,
+  Spinner,
+  TextArea,
+  TextInput,
+  Button,
+  Panel,
+  Divider,
+} from "@patternfly/react-core";
 
 const RestPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [responseData, setResponseData] = useState(null);
-  const [payload, setPayload] = useState('');
-  const [url, setUrl] = useState('');
+  const [payload, setPayload] = useState("");
+  const [url, setUrl] = useState("");
 
   const handleSendRequest = async () => {
     try {
       setIsLoading(true);
 
       const requestOptions = {
-        method: payload ? 'POST' : 'GET',
+        method: payload ? "POST" : "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
+        body: payload || undefined,
       };
 
-      if (payload) {
-        requestOptions.body = payload;
-      }
-
       const response = await fetch(url, requestOptions);
-
       const data = await response.json();
+
       setResponseData(data);
-      setIsLoading(false);
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
+    } finally {
       setIsLoading(false);
     }
   };
@@ -43,7 +49,7 @@ const RestPage = () => {
             id="url"
             name="url"
             value={url}
-            onChange={(value) => setUrl(value)}
+            onChange={setUrl}
             aria-label="URL"
           />
         </div>
@@ -54,16 +60,16 @@ const RestPage = () => {
             id="payload"
             name="payload"
             value={payload}
-            onChange={(value) => setPayload(value)}
+            onChange={setPayload}
             aria-label="Payload"
             autoResize
           />
         </div>
       </div>
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginTop: "20px" }}>
         <Button onClick={handleSendRequest}>Send Request</Button>
       </div>
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginTop: "20px" }}>
         <Title headingLevel="h2">Result</Title>
         <Panel>
           {isLoading ? (
