@@ -29,10 +29,10 @@ const IndexPage = () => {
           <Link to="/home">Home</Link>
         </NavItem>
         <NavItem itemId={1} isActive={activeItem === 1}>
-          <Link to="/rest">REST Page</Link>
+          <Link to="/rest">REST Testing</Link>
         </NavItem>
         <NavItem itemId={2} isActive={activeItem === 2}>
-          <Link to="/eda">EDA Page</Link>
+          <Link to="/eda">EDA Demo page</Link>
         </NavItem>
       </NavList>
     </Nav>
