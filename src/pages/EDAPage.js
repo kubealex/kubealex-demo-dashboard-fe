@@ -66,7 +66,7 @@ const EDAPage = () => {
   ];
 
   return (
-    <PageSection>
+    <PageSection isFilled={true}>
       <Grid hasGutter span={3}>
         {cardData.map(({ id, title, body, endpoint }) => (
           <GridItem key={id}>

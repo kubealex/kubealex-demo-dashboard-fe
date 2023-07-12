@@ -4,6 +4,7 @@ import {
   Page,
   PageSidebar,
   Nav,
+  NavExpandable,
   NavList,
   NavItem,
   Masthead,
@@ -18,8 +19,16 @@ import { ReactComponent as Scientist } from "../assets/scientist.svg";
 
 const IndexPage = () => {
   const [activeItem, setActiveItem] = useState(0);
+  const [activeGroup, setActiveGroup] = useState(null);
+
+  const [isNavOpen, setIsNavOpen] = React.useState(true);
+  const onNavToggle = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   const onSelect = (result) => {
     setActiveItem(result.itemId);
+    setActiveGroup(result.groupId);
   };
 
   const indexPageNav = (
@@ -31,9 +40,18 @@ const IndexPage = () => {
         <NavItem itemId={1} isActive={activeItem === 1}>
           <Link to="/rest">REST Testing</Link>
         </NavItem>
-        <NavItem itemId={2} isActive={activeItem === 2}>
-          <Link to="/eda">EDA Demo page</Link>
-        </NavItem>
+        <NavExpandable
+          title="Ansible Tools"
+          groupId="nav-expandable-group-1"
+          isActive={activeGroup === "nav-expandable-group-1"}
+        >
+          <NavItem itemId={2} isActive={activeItem === 2}>
+            <Link to="/eda">EDA Demo page</Link>
+          </NavItem>
+          <NavItem itemId={3} isActive={activeItem === 3}>
+            <Link to="/aap">AAP Controller page</Link>
+          </NavItem>
+        </NavExpandable>
       </NavList>
     </Nav>
   );
@@ -57,7 +75,7 @@ const IndexPage = () => {
           </MastheadContent>
         </Masthead>
       }
-      sidebar={<PageSidebar nav={indexPageNav} />}
+      sidebar={<PageSidebar nav={indexPageNav} isNavOpen={isNavOpen} />}
       isManagedSidebar
     >
       <Outlet />

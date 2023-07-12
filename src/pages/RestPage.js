@@ -40,52 +40,54 @@ const RestPage = () => {
   };
 
   return (
-    <PageSection>
-      <Title headingLevel="h1">REST Testing Page</Title>
-      <div>
+    <div style={{ height: "100%" }}>
+      <PageSection>
+        <Title headingLevel="h1">REST Testing Page</Title>
         <div>
-          <div>URL</div>
-          <TextInput
-            id="url"
-            name="url"
-            value={url}
-            onChange={setUrl}
-            aria-label="URL"
-          />
+          <div>
+            <div>URL</div>
+            <TextInput
+              id="url"
+              name="url"
+              value={url}
+              onChange={setUrl}
+              aria-label="URL"
+            />
+          </div>
+          <Divider />
+          <div>
+            <div>Payload</div>
+            <TextArea
+              id="payload"
+              name="payload"
+              value={payload}
+              onChange={setPayload}
+              aria-label="Payload"
+              autoResize
+            />
+          </div>
         </div>
-        <Divider />
-        <div>
-          <div>Payload</div>
-          <TextArea
-            id="payload"
-            name="payload"
-            value={payload}
-            onChange={setPayload}
-            aria-label="Payload"
-            autoResize
-          />
+        <div style={{ marginTop: "20px" }}>
+          <Button onClick={handleSendRequest}>Send Request</Button>
         </div>
-      </div>
-      <div style={{ marginTop: "20px" }}>
-        <Button onClick={handleSendRequest}>Send Request</Button>
-      </div>
-      <div style={{ marginTop: "20px" }}>
-        <Title headingLevel="h2">Result</Title>
-        <Panel>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <div>
-              {responseData ? (
-                <pre>{JSON.stringify(responseData, null, 2)}</pre>
-              ) : (
-                <p>No data available.</p>
-              )}
-            </div>
-          )}
-        </Panel>
-      </div>
-    </PageSection>
+        <div style={{ marginTop: "20px" }}>
+          <Title headingLevel="h2">Result</Title>
+          <Panel>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <div>
+                {responseData ? (
+                  <pre>{JSON.stringify(responseData, null, 2)}</pre>
+                ) : (
+                  <p>No data available.</p>
+                )}
+              </div>
+            )}
+          </Panel>
+        </div>
+      </PageSection>
+    </div>
   );
 };
 
