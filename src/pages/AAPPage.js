@@ -12,6 +12,7 @@ import {
   PageSection,
   Icon,
   Alert,
+  Spinner,
 } from "@patternfly/react-core";
 
 import CustomButton from "../components/CustomButton";
@@ -19,10 +20,11 @@ import CustomButton from "../components/CustomButton";
 import ExclamationTriangleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon";
 import CheckCircleIcon from "@patternfly/react-icons/dist/esm/icons/check-circle-icon";
 import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
-import ArrowRightIcon from "@patternfly/react-icons/dist/esm/icons/arrow-right-icon";
+import ExternalLinkSquareAltIcon from "@patternfly/react-icons/dist/esm/icons/external-link-square-alt-icon";
 
 const AAPPage = () => {
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const controllerProxyURL =
     process.env.controller_proxy_url || "http://localhost:8080/ansible/";
   const controllerURL =
@@ -56,6 +58,7 @@ const AAPPage = () => {
           })
         );
         setItems(updatedItems);
+        setIsLoading(false);
         console.log(updatedItems);
       } catch (error) {
         console.error("Error fetching dropdown content:", error);
@@ -63,6 +66,9 @@ const AAPPage = () => {
     };
 
     fetchData();
+    const intervalId = setInterval(fetchData, 5000); // Render the page every 5 seconds
+
+    return () => clearInterval(intervalId); // Clear the interval on component unmount
   }, []);
 
   const getStatusIcon = (status) => {
@@ -101,45 +107,52 @@ const AAPPage = () => {
       )}
       <PageSection isFilled={true}>
         <Grid hasGutter>
-          {items.map((item) => (
-            <GridItem span={3} key={item.id}>
-              <Card>
-                <CardTitle>{item.name}</CardTitle>
-                <CardBody>
-                  <Flex>
-                    <FlexItem>Last execution status:</FlexItem>
-                    <FlexItem>{getStatusIcon(item.status)}</FlexItem>
-                  </Flex>
-                </CardBody>
-                <CardFooter>
-                  <Flex>
-                    <FlexItem>
-                      <CustomButton
-                        buttonText="Launch Template"
-                        endpoint={`${controllerProxyURL}/launch/${item.id}`}
-                        method="POST"
-                        onFetchResult={() => {}}
-                        isDisabled={!item.can_start_without_user_input}
-                      />
-                    </FlexItem>
-                    {hasInputRequiredTemplates && (
-                      <FlexItem>
-                        <Button
-                          variant="link"
-                          component="a"
-                          href={`${controllerURL}/#/templates/job_template/${item.id}/details`}
-                          target="_blank"
-                        >
-                          View in AAP Controller
-                          <ArrowRightIcon />
-                        </Button>
-                      </FlexItem>
-                    )}
-                  </Flex>
-                </CardFooter>
-              </Card>
+          {isLoading ? (
+            <GridItem span={12} align="center">
+              <Spinner size="xl" />
             </GridItem>
-          ))}
+          ) : (
+            items.map((item) => (
+              <GridItem span={3} key={item.id}>
+                <Card>
+                  <CardTitle>{item.name}</CardTitle>
+                  <CardBody>
+                    <Flex>
+                      <FlexItem>Last execution status:</FlexItem>
+                      <FlexItem>{getStatusIcon(item.status)}</FlexItem>
+                    </Flex>
+                  </CardBody>
+                  <CardFooter>
+                    <Flex>
+                      <FlexItem>
+                        <CustomButton
+                          buttonText="Launch Template"
+                          endpoint={`${controllerProxyURL}/launch/${item.id}`}
+                          method="POST"
+                          onFetchResult={() => {}}
+                          isDisabled={!item.can_start_without_user_input}
+                        />
+                      </FlexItem>
+                      {!item.can_start_without_user_input && (
+                        <FlexItem>
+                          <Button
+                            variant="link"
+                            component="a"
+                            href={`${controllerURL}/#/templates/job_template/${item.id}/details`}
+                            target="_blank"
+                            icon={<ExternalLinkSquareAltIcon />}
+                            iconPosition="right"
+                          >
+                            View in AAP Controller
+                          </Button>
+                        </FlexItem>
+                      )}
+                    </Flex>
+                  </CardFooter>
+                </Card>
+              </GridItem>
+            ))
+          )}
         </Grid>
       </PageSection>
     </>

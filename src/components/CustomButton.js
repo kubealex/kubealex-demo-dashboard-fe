@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "@patternfly/react-core";
+import React, { useState } from "react";
+import { Button, Spinner, Alert } from "@patternfly/react-core";
 
 const CustomButton = ({
   buttonText,
@@ -9,7 +9,13 @@ const CustomButton = ({
   isDisabled = false,
   onFetchResult,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+
   const handleClick = async () => {
+    setIsLoading(true);
+    setIsAlertVisible(false);
+
     try {
       const response = await fetch(endpoint, {
         method,
@@ -26,17 +32,28 @@ const CustomButton = ({
       const data = await response.json();
       const fetchResult = { success: true };
       onFetchResult(fetchResult);
+      console.log(`Button '${buttonText}' clicked. Response:`, data);
+
+      setIsAlertVisible(true);
     } catch (error) {
       console.error("Error:", error);
       const fetchResult = { success: false, error };
       onFetchResult(fetchResult);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <Button isDisabled={isDisabled} onClick={handleClick}>
-      {buttonText}
-    </Button>
+    <>
+      <Button
+        isDisabled={isDisabled || isLoading}
+        onClick={handleClick}
+        isLoading={isLoading}
+      >
+        {buttonText}
+      </Button>
+    </>
   );
 };
 
