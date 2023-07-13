@@ -48,7 +48,7 @@ const EDAPage = () => {
     {
       id: "kafka",
       title: "Kafka Integration",
-      body: "This integration sends a kafka event to a topic monitored by EDA",
+      body: "This integration sends a kafka event to a topic monitored by EDA to trigger automation",
       endpoint: "http://localhost:8080/kafka/",
     },
     {
