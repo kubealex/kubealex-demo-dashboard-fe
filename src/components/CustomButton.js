@@ -6,6 +6,7 @@ const CustomButton = ({
   endpoint,
   requestBody = null,
   method = "GET",
+  isDisabled = false,
   onFetchResult,
 }) => {
   const handleClick = async () => {
@@ -25,7 +26,6 @@ const CustomButton = ({
       const data = await response.json();
       const fetchResult = { success: true };
       onFetchResult(fetchResult);
-      console.log(`Button '${buttonText}' clicked. Response:`, data);
     } catch (error) {
       console.error("Error:", error);
       const fetchResult = { success: false, error };
@@ -33,7 +33,11 @@ const CustomButton = ({
     }
   };
 
-  return <Button onClick={handleClick}>{buttonText}</Button>;
+  return (
+    <Button isDisabled={isDisabled} onClick={handleClick}>
+      {buttonText}
+    </Button>
+  );
 };
 
 export default CustomButton;
