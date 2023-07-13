@@ -11,17 +11,21 @@ import {
   CardBody,
   FlexItem,
   Flex,
+  Divider,
+  Title,
+  TitleSizes,
 } from "@patternfly/react-core";
 
 import CheckCircleIcon from "@patternfly/react-icons/dist/esm/icons/check-circle-icon";
 import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
-import ArrowRightIcon from "@patternfly/react-icons/dist/esm/icons/arrow-right-icon";
+import ExternalLinkSquareAltIcon from "@patternfly/react-icons/dist/esm/icons/external-link-square-alt-icon";
 
 import CustomButton from "../components/CustomButton";
 
 const EDAPage = () => {
   const [fetchResults, setFetchResults] = useState({});
-
+  const edaControllerURL =
+    process.env.eda_controller_url || "https://eda.rh-lab.labs/";
   const handleFetchResult = (id) => (result) => {
     setFetchResults((prevResults) => ({
       ...prevResults,
@@ -67,9 +71,24 @@ const EDAPage = () => {
 
   return (
     <PageSection isFilled={true}>
-      <Grid hasGutter span={3}>
+      <Grid hasGutter>
+        <Divider component="div" />
+        <Title headingLevel="h1" size={TitleSizes["4xl"]}>
+          Available Integrations
+          <Button
+            variant="link"
+            component="a"
+            href={`${edaControllerURL}`}
+            target="_blank"
+            icon={<ExternalLinkSquareAltIcon />}
+            iconPosition="right"
+          >
+            Open EDA Controller
+          </Button>
+        </Title>
+
         {cardData.map(({ id, title, body, endpoint }) => (
-          <GridItem key={id}>
+          <GridItem span={3} key={id}>
             <Card>
               <CardTitle>{title}</CardTitle>
               <CardBody>{body}</CardBody>
@@ -88,38 +107,6 @@ const EDAPage = () => {
             </Card>
           </GridItem>
         ))}
-        <GridItem>
-          <Card>
-            <CardBody>
-              <div>
-                <Button
-                  variant="link"
-                  isLarge
-                  component="a"
-                  href={
-                    process.env.aap_controller ||
-                    "https://controller.rh-lab.labs"
-                  }
-                  target="_blank"
-                >
-                  Go to Automation Controller <ArrowRightIcon />
-                </Button>
-              </div>
-              <br />
-              <div>
-                <Button
-                  variant="link"
-                  isLarge
-                  component="a"
-                  href={process.env.eda_controller || "https://eda.rh-lab.labs"}
-                  target="_blank"
-                >
-                  Go to EDA Controller <ArrowRightIcon />
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
-        </GridItem>
       </Grid>
     </PageSection>
   );

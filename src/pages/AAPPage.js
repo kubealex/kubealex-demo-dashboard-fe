@@ -12,7 +12,11 @@ import {
   PageSection,
   Icon,
   Alert,
+  AlertActionCloseButton,
   Spinner,
+  Divider,
+  Title,
+  TitleSizes,
 } from "@patternfly/react-core";
 
 import CustomButton from "../components/CustomButton";
@@ -72,37 +76,51 @@ const AAPPage = () => {
   }, []);
 
   const getStatusIcon = (status) => {
-    if (status === "successful") {
-      return (
+    const statusIcons = {
+      successful: (
         <Icon status="success">
           <CheckCircleIcon />
         </Icon>
-      );
-    } else if (status === "failed") {
-      return (
+      ),
+      failed: (
         <Icon status="danger">
           <ExclamationCircleIcon />
         </Icon>
-      );
-    } else {
-      return (
+      ),
+      default: (
         <Icon status="warning">
           <ExclamationTriangleIcon />
         </Icon>
-      );
-    }
+      ),
+    };
+
+    return statusIcons[status] || statusIcons.default;
   };
 
   const hasInputRequiredTemplates = items.some(
     (item) => !item.can_start_without_user_input
   );
 
+  const filteredTemplates = (isAvailable) =>
+    items.filter((item) => item.can_start_without_user_input === isAvailable);
+
+  const [showAlert, setShowAlert] = useState(true);
+
+  const onCloseAlert = () => {
+    setShowAlert(false);
+  };
   return (
     <>
-      {hasInputRequiredTemplates && (
+      {hasInputRequiredTemplates && showAlert && (
         <Alert
           variant="warning"
           title="One or more templates require manual input to start"
+          actionClose={
+            <AlertActionCloseButton
+              aria-label="Close alert"
+              onClose={onCloseAlert}
+            />
+          }
         />
       )}
       <PageSection isFilled={true}>
@@ -112,46 +130,110 @@ const AAPPage = () => {
               <Spinner size="xl" />
             </GridItem>
           ) : (
-            items.map((item) => (
-              <GridItem span={3} key={item.id}>
-                <Card>
-                  <CardTitle>{item.name}</CardTitle>
-                  <CardBody>
-                    <Flex>
-                      <FlexItem>Last execution status:</FlexItem>
-                      <FlexItem>{getStatusIcon(item.status)}</FlexItem>
-                    </Flex>
-                  </CardBody>
-                  <CardFooter>
-                    <Flex>
-                      <FlexItem>
-                        <CustomButton
-                          buttonText="Launch Template"
-                          endpoint={`${controllerProxyURL}/launch/${item.id}`}
-                          method="POST"
-                          onFetchResult={() => {}}
-                          isDisabled={!item.can_start_without_user_input}
-                        />
-                      </FlexItem>
-                      {!item.can_start_without_user_input && (
-                        <FlexItem>
-                          <Button
-                            variant="link"
-                            component="a"
-                            href={`${controllerURL}/#/templates/job_template/${item.id}/details`}
-                            target="_blank"
-                            icon={<ExternalLinkSquareAltIcon />}
-                            iconPosition="right"
-                          >
-                            View in AAP Controller
-                          </Button>
-                        </FlexItem>
-                      )}
-                    </Flex>
-                  </CardFooter>
-                </Card>
-              </GridItem>
-            ))
+            <>
+              <Divider component="div" />
+              <Title headingLevel="h1" size={TitleSizes["4xl"]}>
+                Available Templates{" "}
+                <Button
+                  variant="link"
+                  component="a"
+                  href={`${controllerURL}`}
+                  target="_blank"
+                  icon={<ExternalLinkSquareAltIcon />}
+                  iconPosition="right"
+                >
+                  Open AAP Controller
+                </Button>
+              </Title>
+              <Grid hasGutter>
+                {filteredTemplates(true).map((item) => (
+                  <GridItem span={3} key={item.id}>
+                    <Card>
+                      <CardTitle>{item.name}</CardTitle>
+                      <CardBody>
+                        <Flex>
+                          <FlexItem>Last execution status:</FlexItem>
+                          <FlexItem>{getStatusIcon(item.status)}</FlexItem>
+                        </Flex>
+                      </CardBody>
+                      <CardFooter>
+                        <Flex>
+                          <FlexItem>
+                            <CustomButton
+                              buttonText="Launch Template"
+                              endpoint={`${controllerProxyURL}/launch/${item.id}`}
+                              method="POST"
+                              onFetchResult={() => {}}
+                              isDisabled={!item.can_start_without_user_input}
+                            />
+                          </FlexItem>
+                          {!item.can_start_without_user_input && (
+                            <FlexItem>
+                              <Button
+                                variant="link"
+                                component="a"
+                                href={`${controllerURL}/#/templates/job_template/${item.id}/details`}
+                                target="_blank"
+                                icon={<ExternalLinkSquareAltIcon />}
+                                iconPosition="right"
+                              >
+                                View in AAP Controller
+                              </Button>
+                            </FlexItem>
+                          )}
+                        </Flex>
+                      </CardFooter>
+                    </Card>
+                  </GridItem>
+                ))}
+              </Grid>
+              <Divider component="div" />
+              <Title headingLevel="h1" size={TitleSizes["4xl"]}>
+                Unavailable Templates
+              </Title>
+              <Grid hasGutter>
+                {filteredTemplates(false).map((item) => (
+                  <GridItem span={3} key={item.id}>
+                    <Card>
+                      <CardTitle>{item.name}</CardTitle>
+                      <CardBody>
+                        <Flex>
+                          <FlexItem>Last execution status:</FlexItem>
+                          <FlexItem>{getStatusIcon(item.status)}</FlexItem>
+                        </Flex>
+                      </CardBody>
+                      <CardFooter>
+                        <Flex>
+                          <FlexItem>
+                            <CustomButton
+                              buttonText="Launch Template"
+                              endpoint={`${controllerProxyURL}/launch/${item.id}`}
+                              method="POST"
+                              onFetchResult={() => {}}
+                              isDisabled={!item.can_start_without_user_input}
+                            />
+                          </FlexItem>
+                          {!item.can_start_without_user_input && (
+                            <FlexItem>
+                              <Button
+                                variant="link"
+                                component="a"
+                                href={`${controllerURL}/#/templates/job_template/${item.id}/details`}
+                                target="_blank"
+                                icon={<ExternalLinkSquareAltIcon />}
+                                iconPosition="right"
+                              >
+                                View in AAP Controller
+                              </Button>
+                            </FlexItem>
+                          )}
+                        </Flex>
+                      </CardFooter>
+                    </Card>
+                  </GridItem>
+                ))}
+              </Grid>
+            </>
           )}
         </Grid>
       </PageSection>
