@@ -2,11 +2,11 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "./Containerfile"
+      - "src/**"
   pull_request:
     branches: ["main"]
     paths:
-      - "./Containerfile"
+      - "src/**"
 jobs:
   build:
     name: Build Dashboard frontend and push image to Quay.
