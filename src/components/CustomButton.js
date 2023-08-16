@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Spinner, Alert } from "@patternfly/react-core";
+import { Button } from "@patternfly/react-core";
 
 const CustomButton = ({
   buttonText,
@@ -10,11 +10,9 @@ const CustomButton = ({
   onFetchResult,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isAlertVisible, setIsAlertVisible] = useState(false);
 
   const handleClick = async () => {
     setIsLoading(true);
-    setIsAlertVisible(false);
 
     try {
       const response = await fetch(endpoint, {
@@ -33,8 +31,6 @@ const CustomButton = ({
       const fetchResult = { success: true };
       onFetchResult(fetchResult);
       console.log(`Button '${buttonText}' clicked. Response:`, data);
-
-      setIsAlertVisible(true);
     } catch (error) {
       console.error("Error:", error);
       const fetchResult = { success: false, error };

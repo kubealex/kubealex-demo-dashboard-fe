@@ -70,10 +70,10 @@ const AAPPage = () => {
     };
 
     fetchData();
-    const intervalId = setInterval(fetchData, 5000); // Render the page every 5 seconds
+    const intervalId = setInterval(fetchData, 30000); // Render the page every 5 seconds
 
     return () => clearInterval(intervalId); // Clear the interval on component unmount
-  }, []);
+  }, [controllerProxyURL]);
 
   const getStatusIcon = (status) => {
     const statusIcons = {

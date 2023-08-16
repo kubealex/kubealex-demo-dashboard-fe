@@ -21,11 +21,6 @@ const IndexPage = () => {
   const [activeItem, setActiveItem] = useState(0);
   const [activeGroup, setActiveGroup] = useState(null);
 
-  const [isNavOpen, setIsNavOpen] = React.useState(true);
-  const onNavToggle = () => {
-    setIsNavOpen(!isNavOpen);
-  };
-
   const onSelect = (result) => {
     setActiveItem(result.itemId);
     setActiveGroup(result.groupId);
@@ -75,7 +70,7 @@ const IndexPage = () => {
           </MastheadContent>
         </Masthead>
       }
-      sidebar={<PageSidebar nav={indexPageNav} isNavOpen={isNavOpen} />}
+      sidebar={<PageSidebar nav={indexPageNav} />}
       isManagedSidebar
     >
       <Outlet />
