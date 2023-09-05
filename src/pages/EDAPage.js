@@ -67,6 +67,12 @@ const EDAPage = () => {
       body: "This integration sends an alert to an AlertManager instance monitored by EDA",
       endpoint: "http://localhost:8080/alertmanager/",
     },
+    {
+      id: "mqtt",
+      title: "MQTT Integration",
+      body: "This integration sends an event to a Mostquitto instance monitored by EDA",
+      endpoint: "http://localhost:8080/mqtt/",
+    },
   ];
 
   return (
