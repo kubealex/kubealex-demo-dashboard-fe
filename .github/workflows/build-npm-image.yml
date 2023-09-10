@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
@@ -33,7 +33,7 @@ jobs:
         working-directory: ${{ env.working-directory }}/
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build DE image
         id: build-image
         uses: redhat-actions/buildah-build@v2
