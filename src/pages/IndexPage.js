@@ -13,6 +13,7 @@ import {
   MastheadMain,
   MastheadBrand,
   MastheadContent,
+  PageSidebarBody,
 } from "@patternfly/react-core";
 import { BarsIcon } from "@patternfly/react-icons";
 import { ReactComponent as Scientist } from "../assets/scientist.svg";
@@ -27,7 +28,7 @@ const IndexPage = () => {
   };
 
   const indexPageNav = (
-    <Nav onSelect={onSelect} aria-label="Nav">
+    <Nav onSelect={onSelect} aria-label="Default global">
       <NavList>
         <NavItem itemId={0} isActive={activeItem === 0}>
           <Link to="/home">Home</Link>
@@ -70,7 +71,11 @@ const IndexPage = () => {
           </MastheadContent>
         </Masthead>
       }
-      sidebar={<PageSidebar nav={indexPageNav} />}
+      sidebar={
+        <PageSidebar>
+          <PageSidebarBody> {indexPageNav} </PageSidebarBody>{" "}
+        </PageSidebar>
+      }
       isManagedSidebar
     >
       <Outlet />
