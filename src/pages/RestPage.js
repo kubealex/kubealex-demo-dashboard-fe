@@ -50,7 +50,7 @@ const RestPage = () => {
               id="url"
               name="url"
               value={url}
-              onChange={setUrl}
+              onChange={(event) => setUrl(event.target.value)}
               aria-label="URL"
             />
           </div>
@@ -61,7 +61,7 @@ const RestPage = () => {
               id="payload"
               name="payload"
               value={payload}
-              onChange={setPayload}
+              onChange={(event) => setPayload(event.target.value)}
               aria-label="Payload"
               autoResize
             />
