@@ -52,14 +52,14 @@ const AAPPage = () => {
                 headers: {
                   "Content-Type": "application/json",
                 },
-              }
+              },
             );
             const { can_start_without_user_input } = await getResponse.json();
             return {
               ...item,
               can_start_without_user_input,
             };
-          })
+          }),
         );
         setItems(updatedItems);
         setIsLoading(false);
@@ -98,7 +98,7 @@ const AAPPage = () => {
   };
 
   const hasInputRequiredTemplates = items.some(
-    (item) => !item.can_start_without_user_input
+    (item) => !item.can_start_without_user_input,
   );
 
   const filteredTemplates = (isAvailable) =>

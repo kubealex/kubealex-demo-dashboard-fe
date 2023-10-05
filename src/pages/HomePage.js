@@ -2,6 +2,7 @@ import React from "react";
 import {
   Page,
   PageSection,
+  Flex,
   Bullseye,
   Title,
   TextContent,
@@ -13,13 +14,13 @@ import { ReactComponent as Scientist } from "../assets/scientist.svg";
 const HomePage = () => {
   return (
     <Page>
-      <div style={{ backgroundColor: "#ffffff", padding: "16px" }}>
-        <Title headingLevel="h1" size="4xl" style={{ color: "#333333" }}>
+      <Flex style={{ backgroundColor: "#ffffff", padding: "16px" }}>
+        <Title headingLevel="h1" size="lg" variant="primary">
           Demo dashboard
         </Title>
-      </div>
+      </Flex>
 
-      <PageSection>
+      <PageSection layout="card" spacing="md">
         <Bullseye>
           <Scientist />
         </Bullseye>
@@ -27,13 +28,19 @@ const HomePage = () => {
 
       <PageSection>
         <TextContent>
-          <Text component={TextVariants.small}>
+          <Text component={TextVariants.paragraph}>
             Image source:{" "}
-            <a href="https://commons.wikimedia.org/wiki/File:Mad_scientist_transparent_background.svg">
+            <a
+              component={TextVariants.link}
+              href="https://commons.wikimedia.org/wiki/File:Mad_scientist_transparent_background.svg"
+            >
               J.J. at the English-language Wikipedia
             </a>
             ,{" "}
-            <a href="http://creativecommons.org/licenses/by-sa/3.0/">
+            <a
+              component={TextVariants.link}
+              href="http://creativecommons.org/licenses/by-sa/3.0/"
+            >
               CC BY-SA 3.0
             </a>
             , via Wikimedia Commons{" "}
