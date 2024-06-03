@@ -44,6 +44,6 @@
   "devDependencies": {
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.34.1",
-    "prettier": "3.2.5"
+    "prettier": "3.3.0"
   }
 }
